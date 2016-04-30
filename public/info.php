@@ -3,5 +3,6 @@
  * Created by PhpStorm.
  * User: linjoseph
  * Date: 4/30/16
- * Time: 2:18 PM
+ * Time: 4:36 PM
  */
+echo phpinfo();

@@ -21,9 +21,14 @@ Route::get('/home', 'HomeController@index');
 
 //profile
 Route::get('/profile', 'ProfileController@index');
-Route::post('/profile/update','ProfileController@update');
+Route::post('/profile/update', 'ProfileController@update');
 
 //user manage
-Route::get('/usermanage/student','UserManageController@studentsList');
-Route::get('/usermanage/teacher','UserManageController@teachersList');
+Route::get('/usermanage/student', 'UserManageController@studentsList');
+Route::get('/usermanage/teacher', 'UserManageController@teachersList');
 
+//api
+Route::group(['prefix' => 'api'], function () {
+    //user
+    Route::resource('usermanage', 'UserManageController@show');
+});

@@ -44,7 +44,8 @@ class ProfileController extends Controller {
         $profile->address = $request->address;
 
         $profile->save();
+        $request->session()->flash('success','更新成功');
 
-        return redirect('/profile');
+        return redirect('/home');
     }
 }

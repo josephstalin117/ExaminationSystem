@@ -59,8 +59,8 @@
                             </a>
 
                             <ul class="dropdown-menu" role="menu">
-                                <li><a href="{{ url('/logout') }}">学生用户管理</a></li>
-                                <li><a href="{{ url('/logout') }}">教师用户管理</a></li>
+                                <li><a href="{{ url('/usermanage/student') }}">学生用户管理</a></li>
+                                <li><a href="{{ url('/usermanage/teacher') }}">教师用户管理</a></li>
                             </ul>
                         </li>
                     @endif

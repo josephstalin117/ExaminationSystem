@@ -39,9 +39,9 @@
                                                    class="btn btn-primary openDetail" data-toggle="modal"
                                                    data-target="#update">修改</a></td>
                                             <td>
-                                                <a href="{{url('usermanage/student/delete/'.$student->id)}}"
-                                                   type="button"
-                                                   class="btn btn-danger"><i class="fa fa-btn fa-trash"></i>删除</a>
+                                                <a href="" type="button" id="delete_student" data-id="{{$student->id}}}" data-toggle="modal"
+                                                   data-target="#delete_dialog" class="btn btn-danger"><i
+                                                            class="fa fa-btn fa-trash"></i>删除</a>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -183,7 +183,19 @@
             </div>
         </div>
     </div>
+    <div class="modal fade" id="delete_dialog" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <p>是否删除</p>
+                <a href="" id="delete_confirm" type="button" class="btn btn-danger" data-dismiss="modal">删除</a>
+                <a type="submit" class="btn btn-primary">取消</a>
+            </div>
+        </div>
+    </div>
     <script>
+        $("#delete_student").click(function(){
+
+        });
         $(document).on("click", ".openDetail", function () {
             var user_id = $(this).data('id');
             $.ajaxSetup({

@@ -30,6 +30,9 @@ Route::post('/usermanage/student/update', 'UserManageController@studentUpdate');
 Route::get('/usermanage/student/delete/{id}', 'UserManageController@studentDelete');
 Route::post('/usermanage/student/create', 'UserManageController@studentCreate');
 
+//paper manage
+Route::get('/papers','PaperController@index');
+
 //api
 Route::group(['prefix' => 'api'], function () {
     //user

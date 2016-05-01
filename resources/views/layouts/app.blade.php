@@ -63,6 +63,17 @@
                                 <li><a href="{{ url('/usermanage/teacher') }}">教师用户管理</a></li>
                             </ul>
                         </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                               aria-expanded="false">
+                                试卷管理 <span class="caret"></span>
+                            </a>
+
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="{{ url('/papers') }}">试卷管理</a></li>
+                                <li><a href="{{ url('/paper/questions') }}">题库管理</a></li>
+                            </ul>
+                        </li>
                     @endif
                 @endif
             </ul>

@@ -12,7 +12,7 @@
                         @include('manage.search')
                         <div class="row" style="margin-top: 10px">
                             <button type="button" class="btn btn-success" data-toggle="modal"
-                                    data-target="#create">创建用户
+                                    data-target="#create_dialog">创建用户
                             </button>
                         </div>
                         @if(count($students)>0)
@@ -34,13 +34,14 @@
                                             <td>{{$student->profile->nickname}}</td>
                                             <td><a href="" type="button" data-id="{{$student->id}}"
                                                    class="btn btn-primary openDetail" data-toggle="modal"
-                                                   data-target="#detail">详情</a></td>
+                                                   data-target="#detail_dialog">详情</a></td>
                                             <td><a href="" type="button" data-id="{{$student->id}}"
                                                    class="btn btn-primary openDetail" data-toggle="modal"
-                                                   data-target="#update">修改</a></td>
+                                                   data-target="#update_dialog">修改</a></td>
                                             <td>
-                                                <a href="" type="button" id="delete_student" data-id="{{$student->id}}}" data-toggle="modal"
-                                                   data-target="#delete_dialog" class="btn btn-danger"><i
+                                                <a href="" type="button" data-id="{{$student->id}}"
+                                                   data-toggle="modal"
+                                                   data-target="#delete_dialog" class="btn btn-danger openModal"><i
                                                             class="fa fa-btn fa-trash"></i>删除</a>
                                             </td>
                                         </tr>
@@ -55,7 +56,7 @@
         </div>
     </div>
     <!--detail Modal -->
-    <div class="modal fade" id="detail" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal fade" id="detail_dialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -89,7 +90,7 @@
     </div>
 
     <!--update Modal -->
-    <div class="modal fade" id="update" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal fade" id="update_dialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -132,7 +133,7 @@
     </div>
 
     <!--create Modal -->
-    <div class="modal fade" id="create" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal fade" id="create_dialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -186,15 +187,29 @@
     <div class="modal fade" id="delete_dialog" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
         <div class="modal-dialog modal-sm">
             <div class="modal-content">
-                <p>是否删除</p>
-                <a href="" id="delete_confirm" type="button" class="btn btn-danger" data-dismiss="modal">删除</a>
-                <a type="submit" class="btn btn-primary">取消</a>
+                <form action="">
+                    <h4>是否删除</h4>
+                    <a href="" type="button" id="delete_confirm" class="btn btn-danger" data-dismiss="modal">删除</a>
+                    <a type="submit" class="btn btn-primary" data-dismiss="modal">取消</a>
+                </form>
             </div>
         </div>
     </div>
     <script>
-        $("#delete_student").click(function(){
-
+        $(document).on("click", ".openModal", function () {
+            var user_id = $(this).data('id');
+            $("#delete_confirm").click(function () {
+                $.ajax({
+                    url: "{{url('/')}}/api/usermanage/delete/" + user_id,
+                    dataType: "json",
+                    method: "get",
+                    success: function (data) {
+                        if ("success" == data.status) {
+                            location.reload();
+                        }
+                    }
+                });
+            });
         });
         $(document).on("click", ".openDetail", function () {
             var user_id = $(this).data('id');

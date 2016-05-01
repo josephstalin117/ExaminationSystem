@@ -24,25 +24,15 @@ class UserManageController extends Controller {
     }
 
     /**
-     * Show student list.
+     * Show user list.
      *
      * @return \Illuminate\Http\Response
      */
-    public function studentsList() {
+    public function index() {
         $students = User::where('role', 2)->orderBy('created_at')->get();
         return view('manage.users', [
             'students' => $students,
         ]);
-    }
-
-    /**
-     * Show teacher list.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function teachersList(Request $request) {
-        //@todo list teachers
-        return view('home');
     }
 
 
@@ -75,6 +65,23 @@ class UserManageController extends Controller {
             $statusCode = 404;
         } finally {
             return Response::json($response, $statusCode);
+        }
+
+    }
+
+    public function destroy(Request $request, $id) {
+        try {
+            $user = User::findOrFail($id);
+            $user->profile->delete();
+            $user->delete();
+            $response = [
+                "status" => "success",
+            ];
+
+            $request->session()->flash('success', '删除成功');
+            return Response::json($response, 200);
+        } catch (Exception $e) {
+            return Response::json("{}", 404);
         }
 
     }

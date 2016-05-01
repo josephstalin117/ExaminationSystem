@@ -24,8 +24,7 @@ Route::get('/profile', 'ProfileController@index');
 Route::post('/profile/update', 'ProfileController@update');
 
 //user manage
-Route::get('/usermanage/student', 'UserManageController@studentsList');
-Route::get('/usermanage/teacher', 'UserManageController@teachersList');
+Route::get('/usermanage/student', 'UserManageController@index');
 Route::post('/usermanage/student/update', 'UserManageController@studentUpdate');
 Route::get('/usermanage/student/delete/{id}', 'UserManageController@studentDelete');
 Route::post('/usermanage/student/create', 'UserManageController@studentCreate');
@@ -37,4 +36,5 @@ Route::get('/papers','PaperController@index');
 Route::group(['prefix' => 'api'], function () {
     //user
     Route::resource('usermanage', 'UserManageController@show');
+    Route::resource('usermanage/delete/{id}', 'UserManageController@destroy');
 });

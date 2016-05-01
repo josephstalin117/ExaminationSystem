@@ -7,7 +7,6 @@
             <div class="panel panel-default">
                 <div class="panel-heading">控制台</div>
                 @include('common.errors')
-
                 <div class="panel-body">
                     欢迎登陆
                 </div>

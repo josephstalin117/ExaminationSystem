@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use Auth;
 use Response;
 use Illuminate\Http\Request;
+use Config;
 
 use App\Http\Requests;
 use APP\User;
+use APP\Profile;
 use Mockery\CountValidator\Exception;
 
 class UserManageController extends Controller {
@@ -16,7 +18,9 @@ class UserManageController extends Controller {
      *
      */
     public function __construct() {
+
         $this->middleware('auth');
+        $this->authorize('userManage', Auth::user());
     }
 
     /**
@@ -26,7 +30,6 @@ class UserManageController extends Controller {
      */
     public function studentsList() {
         //@todo list the students
-        $this->authorize('userManage', Auth::user());
 
         $students = User::where('role', 2)->orderBy('created_at')->get();
         return view('manage.users_list', [
@@ -41,7 +44,6 @@ class UserManageController extends Controller {
      */
     public function teachersList(Request $request) {
         //@todo list teachers
-        $this->authorize('userManage', Auth::user());
         return view('home');
     }
 
@@ -81,7 +83,6 @@ class UserManageController extends Controller {
      */
     public function show($id) {
         try {
-            $this->authorize('userManage', Auth::user());
             $user = User::find($id);
             $statusCode = 200;
             $response = ["user" => [
@@ -105,6 +106,68 @@ class UserManageController extends Controller {
             return Response::json($response, $statusCode);
         }
 
+    }
+
+    public function studentUpdate(Request $request) {
+
+        $this->validate($request, [
+            'telephone' => 'required',
+            'nickname' => 'required',
+            'address' => 'required',
+            'email' => 'required',
+        ]);
+
+        $user = User::findOrFail($request->input('id'));
+        $user->profile->telephone = $request->input('telephone');
+        $user->profile->nickname = $request->input('nickname');
+        $user->email = $request->input('email');
+        $user->profile->address = $request->input('address');
+
+        $user->save();
+        $user->profile->save();
+        $request->session()->flash('success', '更新成功');
+
+        return redirect('/usermanage/student');
+    }
+
+    public function studentDelete($id) {
+
+        $user = User::findOrFail($id);
+        $user->profile->delete();
+        $user->delete();
+
+
+        return redirect('/usermanage/student');
+    }
+
+    public function studentCreate(Request $request) {
+
+        //@todo 需要处理password
+        $this->validate($request, [
+            'name' => 'required',
+            'nickname' => 'required',
+            'email' => 'required',
+            'password' => 'required',
+            'telephone' => 'required',
+            'address' => 'required',
+        ]);
+
+        $user = User::create([
+            'name' => $request->input('name'),
+            'email' => $request->input('email'),
+            'password' => bcrypt($request->input('password')),
+            'role' => Config::get('constants.ROLE_STUDENT'),
+        ]);
+
+        $user->profile()->save(new Profile());
+        $user->profile->nickname = $request->input('nickname');
+        $user->profile->telephone = $request->input('telephone');
+        $user->profile->address = $request->input('address');
+
+        $user->profile->save();
+
+        $request->session()->flash('success', '新增成功');
+        return redirect('/usermanage/student');
     }
 
     /**

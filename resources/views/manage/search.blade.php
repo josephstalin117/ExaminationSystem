@@ -8,5 +8,4 @@
         </div>
         <button type="submit" class="btn btn-primary">搜索</button>
     </form>
-    <a href="" type="button" class="btn btn-success">创建用户</a>
 </div>

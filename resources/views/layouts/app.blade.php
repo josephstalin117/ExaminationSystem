@@ -42,7 +42,7 @@
 
             <!-- Branding Image -->
             <a class="navbar-brand" href="{{ url('/') }}">
-                行政能力测试
+                职业性格测试
             </a>
         </div>
 

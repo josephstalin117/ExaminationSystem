@@ -9,6 +9,10 @@ class Paper extends Model {
     protected $fillable = ['name', 'user_id', 'score', 'remark'];
 
     public function user() {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo('App\User');
+    }
+
+    public function questions(){
+        return $this->hasMany('App\Question');
     }
 }

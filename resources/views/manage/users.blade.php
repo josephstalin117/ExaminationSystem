@@ -184,14 +184,13 @@
             </div>
         </div>
     </div>
+    {{--delete modal--}}
     <div class="modal fade" id="delete_dialog" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
         <div class="modal-dialog modal-sm">
             <div class="modal-content">
-                <form action="">
-                    <h4>是否删除</h4>
-                    <a href="" type="button" id="delete_confirm" class="btn btn-danger" data-dismiss="modal">删除</a>
-                    <a type="submit" class="btn btn-primary" data-dismiss="modal">取消</a>
-                </form>
+                <h4>是否删除</h4>
+                <a href="" type="button" id="delete_confirm" class="btn btn-danger" data-dismiss="modal">删除</a>
+                <a type="submit" class="btn btn-primary" data-dismiss="modal">取消</a>
             </div>
         </div>
     </div>

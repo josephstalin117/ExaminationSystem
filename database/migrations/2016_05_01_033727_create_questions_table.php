@@ -12,7 +12,7 @@ class CreateQuestionsTable extends Migration {
     public function up() {
         Schema::create('questions', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('paper_id');
+            $table->integer('paper_id');
             $table->integer('question_id');
             $table->string('type')->default('1');
             $table->timestamps();

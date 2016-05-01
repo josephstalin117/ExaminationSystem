@@ -1,5 +1,4 @@
 <?php
-
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -31,10 +30,15 @@ Route::post('/usermanage/student/create', 'UserManageController@studentCreate');
 
 //paper manage
 Route::get('/papers','PaperController@index');
+Route::post('/paper/create','PaperController@create');
+Route::get('/paper/edit/{id}','PaperController@edit');
+Route::post('/question/create','QuestionController@create');
 
 //api
 Route::group(['prefix' => 'api'], function () {
     //user
     Route::resource('usermanage', 'UserManageController@show');
-    Route::resource('usermanage/delete/{id}', 'UserManageController@destroy');
+    Route::resource('usermanage/delete', 'UserManageController@destroy');
+    //paper
+    Route::resource('paper/delete', 'PaperController@destroy');
 });

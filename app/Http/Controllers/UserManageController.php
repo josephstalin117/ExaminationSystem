@@ -29,8 +29,6 @@ class UserManageController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function studentsList() {
-        //@todo list the students
-
         $students = User::where('role', 2)->orderBy('created_at')->get();
         return view('manage.users_list', [
             'students' => $students,
@@ -142,7 +140,6 @@ class UserManageController extends Controller {
 
     public function studentCreate(Request $request) {
 
-        //@todo 需要处理password
         $this->validate($request, [
             'name' => 'required',
             'nickname' => 'required',

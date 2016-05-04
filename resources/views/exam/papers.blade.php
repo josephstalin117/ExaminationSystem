@@ -31,9 +31,8 @@
                                             <td>{{$paper->score}}</td>
                                             <td>{{$paper->time}}</td>
                                             <td>{{$paper->remark}}</td>
-                                            <td><a href="" type="button" data-id="{{$paper->id}}"
-                                                   class="btn btn-primary openDetail" data-toggle="modal"
-                                                   data-target="#detail">参加考试</a></td>
+                                            <td><a href="{{url('/exam/paper').'/'.$paper->id}}" type="button"
+                                                   class="btn btn-primary openDetail">参加考试</a></td>
                                         </tr>
                                     @endforeach
                                     </tbody>

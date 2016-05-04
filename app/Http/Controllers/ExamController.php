@@ -21,4 +21,13 @@ class ExamController extends Controller {
             'papers' => $papers,
         ]);
     }
+
+
+    public function paper($id) {
+        $paper = Paper::findOrFail($id);
+        $questions = $paper->questions;
+        return view('exam.questions', [
+            'questions' => $questions,
+        ]);
+    }
 }

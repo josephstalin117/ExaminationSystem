@@ -36,6 +36,7 @@ Route::post('/question/create', 'QuestionController@create');
 
 //exam manage
 Route::get('exam/papers', 'ExamController@papers');
+Route::get('exam/paper/{id}', 'ExamController@paper');
 
 //api
 Route::group(['prefix' => 'api'], function () {

@@ -29,10 +29,13 @@ Route::get('/usermanage/student/delete/{id}', 'UserManageController@studentDelet
 Route::post('/usermanage/student/create', 'UserManageController@studentCreate');
 
 //paper manage
-Route::get('/papers','PaperController@index');
-Route::post('/paper/create','PaperController@create');
-Route::get('/paper/edit/{id}','PaperController@edit');
-Route::post('/question/create','QuestionController@create');
+Route::get('/papers', 'PaperController@index');
+Route::post('/paper/create', 'PaperController@create');
+Route::get('/paper/edit/{id}', 'PaperController@edit');
+Route::post('/question/create', 'QuestionController@create');
+
+//exam manage
+Route::get('exam/papers', 'ExamController@papers');
 
 //api
 Route::group(['prefix' => 'api'], function () {

@@ -51,7 +51,7 @@
             <ul class="nav navbar-nav">
                 @if(Auth::check())
                     <li><a href="{{ url('/home') }}">主页</a></li>
-                    @if(0==Auth::user()->role)
+                    @if(Config::get('constants.ROLE_ADMIN')==Auth::user()->role)
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
                                aria-expanded="false">
@@ -74,6 +74,11 @@
                                 <li><a href="{{ url('/paper/questions') }}">题库管理</a></li>
                             </ul>
                         </li>
+                    @elseif(Config::get('constants.ROLE_STUDENT')==Auth::user()->role)
+                        <li><a href="{{ url('/exam/papers') }}">参加考试</a></li>
+                        <li><a href="{{ url('/papers') }}">查看成绩</a></li>
+                    @else
+                        <li><a href="{{ url('/papers') }}">查看学生成绩</a></li>
                     @endif
                 @endif
             </ul>

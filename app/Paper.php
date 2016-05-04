@@ -12,7 +12,11 @@ class Paper extends Model {
         return $this->belongsTo('App\User');
     }
 
-    public function questions(){
+    public function questions() {
         return $this->hasMany('App\Question');
+    }
+
+    public function scores() {
+        return $this->hasMany('App\Score');
     }
 }

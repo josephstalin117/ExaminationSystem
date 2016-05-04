@@ -82,4 +82,9 @@ class PaperController extends Controller {
         }
 
     }
+
+
+    public function rate(){
+
+    }
 }

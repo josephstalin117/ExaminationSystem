@@ -14,7 +14,7 @@
                     @if(count($questions)>0)
                         <table class="table table-bordered">
                             <tbody>
-                            <form action="">
+                            <form action="{{url('/')}}" method="post">
                                 @foreach($questions as $question)
                                     <tr class="openModal" data-id="{{$question->id}}">
                                         <td>{{$question->single->title}}</td>
@@ -51,6 +51,7 @@
                             @endforeach
                             </tbody>
                         </table>
+                        <button type="submit">提交试卷</button>
                         </form>
                     @endif
                 </div>

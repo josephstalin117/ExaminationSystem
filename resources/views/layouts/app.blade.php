@@ -72,6 +72,7 @@
                             <ul class="dropdown-menu" role="menu">
                                 <li><a href="{{ url('/papers') }}">试卷管理</a></li>
                                 <li><a href="{{ url('/paper/questions') }}">题库管理</a></li>
+                                <li><a href="{{ url('/roommanage/rooms') }}">考场管理</a></li>
                             </ul>
                         </li>
                     @elseif(Config::get('constants.ROLE_STUDENT')==Auth::user()->role)

@@ -12,9 +12,8 @@
                         @include('paper.search')
                     </div>
                     @if(count($questions)>0)
-                        <table class="table table-bordered">
-                            <tbody>
-                            <form action="{{url('/')}}" method="post">
+                        <form action="{{url('/')}}" method="post">
+                            <table class="table table-bordered">
                                 @foreach($questions as $question)
                                     <tr class="openModal" data-id="{{$question->id}}">
                                         <td>{{$question->single->title}}</td>
@@ -48,10 +47,9 @@
                                             </div>
                                         </td>
                                     </tr>
-                            @endforeach
-                            </tbody>
-                        </table>
-                        <button type="submit">提交试卷</button>
+                                @endforeach
+                            </table>
+                            <button type="submit">提交试卷</button>
                         </form>
                     @endif
                 </div>

@@ -24,6 +24,46 @@ class PaperController extends Controller {
         ]);
     }
 
+    /**
+     * 试卷搜索
+     * @param $name
+     * @return mixed
+     */
+    public function search($name = "") {
+        $this->authorize('userManage', Auth::user());
+
+        try {
+            $response = [
+                "papers" => [],
+                "status" => "",
+            ];
+            $papers = Paper::where('name', 'LIKE', "%$name%")->get();
+            $statusCode = 200;
+            foreach ($papers as $paper) {
+
+                $response['papers'][] = [
+                    'id' => $paper->id,
+                    'nickname' => $paper->user->profile->nickname,
+                    'name' => $paper->name,
+                    'score' => $paper->score,
+                    'remark' => $paper->remark,
+                    'time' => $paper->time,
+                ];
+            }
+
+            $response['status'] = "success";
+
+        } catch (\Exception $e) {
+            $response = [
+                "error" => "can't find paper",
+                "status" => "fails"
+            ];
+            $statusCode = 404;
+        } finally {
+            return Response::json($response, $statusCode);
+        }
+    }
+
     public function create(Request $request) {
 
         $this->authorize('userManage', Auth::user());
@@ -34,7 +74,7 @@ class PaperController extends Controller {
             'time' => 'required',
         ]);
 
-        $paper = Paper::create([
+        Paper::create([
             'user_id' => Auth::user()->id,
             'name' => $request->input('name'),
             'score' => $request->input('score'),
@@ -74,7 +114,7 @@ class PaperController extends Controller {
 
             $request->session()->flash('success', '删除成功');
             return Response::json($response, 200);
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             $response = [
                 "status" => "success",
             ];
@@ -83,8 +123,8 @@ class PaperController extends Controller {
 
     }
 
-
-    public function rate(){
+    //@todo 打分
+    public function rate() {
 
     }
 }

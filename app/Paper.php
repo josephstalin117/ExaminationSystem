@@ -21,6 +21,6 @@ class Paper extends Model {
     }
 
     public function room() {
-        return $this->belongsTo('App\Paper');
+        return $this->hasOne('App\Room');
     }
 }

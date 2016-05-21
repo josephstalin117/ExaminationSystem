@@ -11,12 +11,12 @@ class Room extends Model {
 
     protected $fillable = ['paper_id', 'name', 'remark'];
 
-    public function room_users() {
-        return $this->hasMany('App\Room_user');
+    public function room_user() {
+        return $this->belongsTo('App\Room_user');
     }
 
-    public function paper(){
-        return $this->hasOne('App\Paper');
+    public function paper() {
+        return $this->belongsTo('App\Paper');
     }
 
 }

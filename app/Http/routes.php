@@ -29,7 +29,7 @@ Route::get('/usermanage/student/delete/{id}', 'UserManageController@studentDelet
 Route::post('/usermanage/student/create', 'UserManageController@studentCreate');
 
 //room manage
-Route::get('/roommanage/rooms','RoomController@index');
+Route::get('/roommanage/rooms', 'RoomController@index');
 Route::get('/roommanage/create', 'RoomController@create');
 Route::post('/roommanage/store', 'RoomController@store');
 Route::get('/roommanage/edit/{id}', 'RoomController@edit');
@@ -54,4 +54,7 @@ Route::group(['prefix' => 'api'], function () {
     //paper
     Route::resource('paper/delete', 'PaperController@destroy');
     Route::resource('papers/search', 'PaperController@search');
+    //room
+    Route::get('/roommanage/{room_id}/user/{user_id}', 'RoomController@add_user');
+    Route::get('/roommanage/user/remove/{id}', 'RoomController@remove_user');
 });

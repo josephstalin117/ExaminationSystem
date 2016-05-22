@@ -9,7 +9,6 @@
 
                     <div class="panel-body">
                         @include('common.errors')
-                        @include('paper.search')
                         @if(count($papers)>0)
                             <div class="row" style="margin-top: 10px;">
                                 <table class="table table-bordered">

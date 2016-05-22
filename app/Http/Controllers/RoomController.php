@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Auth;
 use Response;
+use DB;
 use App\User;
+use App\Score;
 use App\Room;
 use App\Room_user;
 use App\Http\Requests;
@@ -25,6 +27,18 @@ class RoomController extends Controller {
 
         return view('manage.rooms', [
             'rooms' => $rooms,
+        ]);
+
+    }
+
+    public function scores($room_id, $paper_id) {
+
+        $this->authorize('userManage', Auth::user());
+
+        $scores = Score::where('paper_id', $paper_id)->where('room_id', $room_id)->get();
+
+        return view('manage.scores', [
+            'scores' => $scores,
         ]);
 
     }

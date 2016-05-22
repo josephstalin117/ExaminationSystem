@@ -9,10 +9,10 @@
 
                     <div class="panel-body">
                         @include('common.errors')
-                        @include('paper.search')
                     </div>
                     @if(count($questions)>0)
-                        <form action="{{url('/')}}" method="post">
+                        <form action="{{url("/exam/room/$room_id/paper/$paper_id/rate")}}" method="post">
+                            {!! csrf_field() !!}
                             <table class="table table-bordered">
                                 @foreach($questions as $question)
                                     <tr class="openModal" data-id="{{$question->id}}">
@@ -22,8 +22,7 @@
                                         <td>
                                             <div class="radio">
                                                 <label>
-                                                    <input type="radio" name="{{$question->id}}" id="a" value="a"
-                                                           checked>
+                                                    <input type="radio" name="{{$question->id}}" id="a" value="a">
                                                     {{$question->single->a}}
                                                 </label>
                                             </div>
@@ -49,7 +48,7 @@
                                     </tr>
                                 @endforeach
                             </table>
-                            <button type="submit">提交试卷</button>
+                            <button class="btn btn-default" type="submit">提交试卷</button>
                         </form>
                     @endif
                 </div>

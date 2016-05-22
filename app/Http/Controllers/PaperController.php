@@ -123,8 +123,5 @@ class PaperController extends Controller {
 
     }
 
-    //@todo 打分
-    public function rate() {
 
-    }
 }

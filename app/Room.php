@@ -15,6 +15,10 @@ class Room extends Model {
         return $this->belongsTo('App\Room_user');
     }
 
+    public function scores() {
+        return $this->hasMany('App\Score');
+    }
+
     public function paper() {
         return $this->belongsTo('App\Paper');
     }

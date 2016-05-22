@@ -35,4 +35,8 @@ class User extends Authenticatable {
         return $this->hasMany('App\Score');
     }
 
+    public function room_users() {
+        return $this->hasMany('App\Room_user');
+    }
+
 }

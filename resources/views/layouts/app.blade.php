@@ -7,9 +7,6 @@
 
     <title>行政能力测试系统</title>
 
-    <!-- Fonts -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700">
-
     <!-- Styles -->
     <link href="{{URL::asset('css/bootstrap.min.css')}}" rel="stylesheet">
     <link href="{{URL::asset('css/font-awesome.min.css')}}" rel="stylesheet">
@@ -60,7 +57,6 @@
 
                             <ul class="dropdown-menu" role="menu">
                                 <li><a href="{{ url('/usermanage/student') }}">学生用户管理</a></li>
-                                <li><a href="{{ url('/usermanage/teacher') }}">教师用户管理</a></li>
                             </ul>
                         </li>
                         <li class="dropdown">
@@ -72,11 +68,12 @@
                             <ul class="dropdown-menu" role="menu">
                                 <li><a href="{{ url('/papers') }}">试卷管理</a></li>
                                 <li><a href="{{ url('/paper/questions') }}">题库管理</a></li>
+                                <li><a href="{{ url('/roommanage/rooms') }}">考场管理</a></li>
                             </ul>
                         </li>
                     @elseif(Config::get('constants.ROLE_STUDENT')==Auth::user()->role)
-                        <li><a href="{{ url('/exam/papers') }}">参加考试</a></li>
-                        <li><a href="{{ url('/papers') }}">查看成绩</a></li>
+                        <li><a href="{{ url('/exam/rooms') }}">参加考试</a></li>
+                        <li><a href="{{ url('/exam/scores') }}">查看成绩</a></li>
                     @else
                         <li><a href="{{ url('/papers') }}">查看学生成绩</a></li>
                     @endif

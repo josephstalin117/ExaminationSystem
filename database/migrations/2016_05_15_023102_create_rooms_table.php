@@ -3,19 +3,20 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateScoresTable extends Migration {
+class CreateRoomsTable extends Migration
+{
     /**
      * Run the migrations.
      *
      * @return void
      */
-    public function up() {
-        Schema::create('scores', function (Blueprint $table) {
+    public function up()
+    {
+        Schema::create('rooms', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id');
-            $table->integer('score');
-            $table->integer('room_id');
             $table->integer('paper_id');
+            $table->string('name');
+            $table->string('remark');
             $table->timestamps();
         });
     }
@@ -25,7 +26,8 @@ class CreateScoresTable extends Migration {
      *
      * @return void
      */
-    public function down() {
-        Schema::drop('scores');
+    public function down()
+    {
+        Schema::drop('rooms');
     }
 }

@@ -28,6 +28,14 @@ Route::post('/usermanage/student/update', 'UserManageController@studentUpdate');
 Route::get('/usermanage/student/delete/{id}', 'UserManageController@studentDelete');
 Route::post('/usermanage/student/create', 'UserManageController@studentCreate');
 
+//room manage
+Route::get('/roommanage/rooms', 'RoomController@index');
+Route::get('/roommanage/room/{room_id}/paper/{paper_id}', 'RoomController@scores');
+Route::get('/roommanage/create', 'RoomController@create');
+Route::post('/roommanage/store', 'RoomController@store');
+Route::get('/roommanage/edit/{id}', 'RoomController@edit');
+Route::get('/roommanage/room/delete/{id}', 'RoomController@delete');
+
 //paper manage
 Route::get('/papers', 'PaperController@index');
 Route::post('/paper/create', 'PaperController@create');
@@ -35,14 +43,21 @@ Route::get('/paper/edit/{id}', 'PaperController@edit');
 Route::post('/question/create', 'QuestionController@create');
 
 //exam manage
-Route::get('exam/papers', 'ExamController@papers');
-Route::get('exam/paper/{id}', 'ExamController@paper');
+Route::get('exam/rooms', 'ExamController@exam_rooms');
+Route::post('exam/room/{room_id}/paper/{paper_id}/rate', 'ExamController@rate');
+Route::get('exam/room/{room_id}/paper/{paper_id}', 'ExamController@exam');
+Route::get('exam/scores', 'ExamController@user_scores');
 
 //api
 Route::group(['prefix' => 'api'], function () {
     //user
     Route::resource('usermanage', 'UserManageController@show');
+    Route::resource('usermanage/search', 'UserManageController@search');
     Route::resource('usermanage/delete', 'UserManageController@destroy');
     //paper
     Route::resource('paper/delete', 'PaperController@destroy');
+    Route::resource('papers/search', 'PaperController@search');
+    //room
+    Route::get('/roommanage/{room_id}/user/{user_id}', 'RoomController@add_user');
+    Route::get('/roommanage/user/remove/{id}', 'RoomController@remove_user');
 });

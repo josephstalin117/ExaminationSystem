@@ -10,7 +10,7 @@ class Profile extends Model {
 
     protected $fillable=['telephone','nickname','avatar','address'];
 
-    public function User(){
+    public function user(){
         return $this->belongsTo('App\User');
     }
 

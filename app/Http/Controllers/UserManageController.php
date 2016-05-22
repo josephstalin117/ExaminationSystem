@@ -6,6 +6,7 @@ use Auth;
 use Response;
 use Illuminate\Http\Request;
 use Config;
+use DB;
 
 use App\Http\Requests;
 use APP\User;
@@ -58,15 +59,54 @@ class UserManageController extends Controller {
                 'address' => $user->profile->address,
             ]];
 
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             $response = [
                 "error" => "can't find user",
+                "reason" => $e,
             ];
             $statusCode = 404;
         } finally {
             return Response::json($response, $statusCode);
         }
 
+    }
+
+    /**
+     * 用户搜索模块
+     * @param string $nickname
+     * @return mixed
+     */
+    public function search($nickname = "") {
+        $this->authorize('userManage', Auth::user());
+
+        try {
+            $response = [
+                "users" => [],
+                "status" => "",
+            ];
+            $users = DB::table('users')->join('profiles', 'users.id', '=', 'profiles.user_id')->select('users.*', 'profiles.nickname')->where('users.role', Config::get('constants.ROLE_STUDENT'))->where('profiles.nickname', "LIKE", "%$nickname%")->get();
+
+            $statusCode = 200;
+
+            foreach ($users as $user) {
+                $response['users'][] = [
+                    'id' => $user->id,
+                    'name' => $user->name,
+                    'nickname' => $user->nickname,
+                ];
+            }
+
+            $response["status"] = "success";
+
+        } catch (\Exception $e) {
+            $response = [
+                "error" => "can't find user",
+                "status"=>"fails",
+            ];
+            $statusCode = 404;
+        } finally {
+            return Response::json($response, $statusCode);
+        }
     }
 
     public function destroy(Request $request, $id) {
@@ -80,7 +120,7 @@ class UserManageController extends Controller {
 
             $request->session()->flash('success', '删除成功');
             return Response::json($response, 200);
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return Response::json("{}", 404);
         }
 

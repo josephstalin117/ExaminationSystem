@@ -11,4 +11,7 @@
      'ROLE_STUDENT' => '2',
 
      'QUESTION_SINGLE'=>'1',
+
+     'EXAM_NOTATTEND'=>'0',
+     'EXAM_ATTENDED'=>'1',
  ];

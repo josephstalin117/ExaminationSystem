@@ -19,4 +19,8 @@ class Paper extends Model {
     public function scores() {
         return $this->hasMany('App\Score');
     }
+
+    public function room() {
+        return $this->hasOne('App\Room');
+    }
 }

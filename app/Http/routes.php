@@ -41,6 +41,7 @@ Route::get('/papers', 'PaperController@index');
 Route::post('/paper/create', 'PaperController@create');
 Route::get('/paper/edit/{id}', 'PaperController@edit');
 Route::post('/question/create', 'QuestionController@create');
+Route::get('/question/singles', 'QuestionController@list_singles');
 
 //exam manage
 Route::get('exam/rooms', 'ExamController@exam_rooms');

@@ -67,7 +67,7 @@
 
                             <ul class="dropdown-menu" role="menu">
                                 <li><a href="{{ url('/papers') }}">试卷管理</a></li>
-                                <li><a href="{{ url('/paper/questions') }}">题库管理</a></li>
+                                <li><a href="{{ url('/question/singles') }}">题库管理</a></li>
                                 <li><a href="{{ url('/roommanage/rooms') }}">考场管理</a></li>
                             </ul>
                         </li>

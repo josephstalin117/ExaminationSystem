@@ -63,4 +63,28 @@ class QuestionController extends Controller {
             'singles' => $singles,
         ]);
     }
+
+    public function delete_singles($single_id) {
+
+        $this->authorize('userManage', Auth::user());
+
+        try {
+            $paper = Room::findOrFail($id);
+            $questions = $paper->questions;
+            foreach ($questions as $question) {
+                $question->delete();
+            }
+            $paper->delete();
+            $response = [
+                "status" => "success",
+            ];
+
+            return Response::json($response, 200);
+        } catch (\Exception $e) {
+            $response = [
+                "status" => "success",
+            ];
+            return Response::json($response, 404);
+        }
+    }
 }

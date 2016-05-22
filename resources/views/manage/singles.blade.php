@@ -22,6 +22,7 @@
                                         <th>答案</th>
                                         <th>分值</th>
                                         <th>时间</th>
+                                        <th>删除</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -34,6 +35,7 @@
                                             <td>{{$single->d}}</td>
                                             <td>{{$single->answer}}</td>
                                             <td>{{$single->score}}</td>
+                                            <td>{{$single->created_at}}</td>
                                             <td>{{$single->created_at}}</td>
                                         </tr>
                                     @endforeach

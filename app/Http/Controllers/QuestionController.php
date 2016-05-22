@@ -11,7 +11,6 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 
 class QuestionController extends Controller {
-    //
     public function __construct() {
 
         $this->middleware('auth');
@@ -52,5 +51,16 @@ class QuestionController extends Controller {
 
         $request->session()->flash('success', '新增成功');
         return redirect('/paper/edit/' . $request->input('paper_id'));
+    }
+
+    public function list_singles() {
+
+        $this->authorize('userManage', Auth::user());
+
+        $singles = Single::all();
+
+        return view('manage.singles', [
+            'singles' => $singles,
+        ]);
     }
 }

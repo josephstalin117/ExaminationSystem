@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Config;
 use Auth;
 use App\Single;
+use App\Paper;
 use App\Question;
 use Illuminate\Http\Request;
 

@@ -62,10 +62,13 @@ Route::group(['prefix' => 'api'], function () {
     //paper
     Route::resource('paper/delete', 'PaperController@destroy');
     Route::resource('papers/search', 'PaperController@search');
+    Route::get('papermanage/question/remove/{question_id}', 'PaperController@remove');
+    Route::get('papermanage/import/paper/{paper_id}/single/{single_id}', 'PaperController@import_single');
     //room
     Route::get('/roommanage/{room_id}/user/{user_id}', 'RoomController@add_user');
     Route::get('/roommanage/user/remove/{id}', 'RoomController@remove_user');
     Route::get('/roommanage/delete/{id}', 'RoomController@destroy');
     //single
     Route::get('/questionmanage/single/delete/{id}', 'SingleController@destroy');
+    Route::get('/questionmanage/single/search/{title}', 'SingleController@search');
 });

@@ -24,19 +24,19 @@
                             </div>
                             <div class="form-group">
                                 <label for="a">a选项</label>
-                                <input type="text" class="form-control" name="a" value="{{$single->a}}">
+                                <input type="text" class="form-control" id="a" name="a" value="{{$single->a}}">
                             </div>
                             <div class="form-group">
                                 <label for="b">b选项</label>
-                                <input type="text" class="form-control" name="b" value="{{$single->b}}">
+                                <input type="text" class="form-control" id="b" name="b" value="{{$single->b}}">
                             </div>
                             <div class="form-group">
                                 <label for="c">c选项</label>
-                                <input type="text" class="form-control" name="c" value="{{$single->c}}">
+                                <input type="text" class="form-control" id="c" name="c" value="{{$single->c}}">
                             </div>
                             <div class="form-group">
                                 <label for="d">d选项</label>
-                                <input type="text" class="form-control" name="d" value="{{$single->d}}">
+                                <input type="text" class="form-control" id="d" name="d" value="{{$single->d}}">
                             </div>
                             <div class="form-group">
                                 <label for="answer">答案</label>
@@ -53,7 +53,7 @@
                                        value="{{$single->remark}}">
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                                <a type="button" class="btn btn-default" onclick="history.go(-1)">关闭</a>
                                 <button type="submit" class="btn btn-primary">保存</button>
                             </div>
                         </form>
@@ -62,6 +62,4 @@
             </div>
         </div>
     </div>
-    <script>
-    </script>
 @endsection

@@ -13,7 +13,8 @@
                             <a type="button" class="btn btn-success" data-toggle="modal"
                                data-target="#create_dialog">添加题目
                             </a>
-                            <a type="button" class="btn btn-primary" href="">导入题目
+                            <a type="button" class="btn btn-primary" data-toggle="modal"
+                               data-target="#search_dialog">导入题目
                             </a>
                         </div>
                         @if(count($questions)>0)
@@ -62,12 +63,12 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td><a href="" type="button" data-id="{{$question->id}}"
-                                                   class="btn btn-primary openDetail" data-toggle="modal"
-                                                   data-target="#detail">修订</a>
-                                                <a href="" type="button" data-id="{{$question->id}}"
-                                                   class="btn btn-danger" data-toggle="modal"
-                                                   data-target="#delete_dialog"><i class="fa fa-btn fa-trash"></i>删除</a>
+                                            <td><a href="{{url('/question/single/update/').'/'.$question->single->id}}"
+                                                   type="button" class="btn btn-primary">修订</a>
+                                                <a href="" type="button"
+                                                   onclick="remove_single({{$question->id}})"
+                                                   class="btn btn-danger">
+                                                    <i class="fa fa-btn fa-trash"></i>删除</a>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -142,4 +143,82 @@
             </div>
         </div>
     </div>
+
+    <!--search user Modal -->
+    <div class="modal fade" id="search_dialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">试题</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="search_content" name="search_content"
+                                       placeholder="请输入题目内容">
+                            </div>
+                            <ul class="list-group" id="list_singles">
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function remove_single(id) {
+            if (confirm("是否移除此题目")) {
+                $.ajax({
+                    url: "{{url('/api/papermanage/question/remove')}}" + "/" + id,
+                    dataType: "json",
+                    method: "get",
+                    success: function (data) {
+                        if ("success" == data.status) {
+                            location.reload();
+                        }
+                    }
+                });
+            }
+        }
+
+        $("#search_content").change(function () {
+            $.ajax({
+                url: "{{url('/api/questionmanage/single/search')}}" + "/" + $("#search_content").val(),
+                dataType: "json",
+                method: "get",
+                success: function (result) {
+                    if ("success" == result.status) {
+                        $("#list_singles").html('');
+                        for (var i = 0; i < result.singles.length; i++) {
+                            $("#list_singles").append("<li class='list-group-item' id=" + result.singles[i].id + "></li>");
+                            $("#" + result.singles[i].id).append(result.singles[i].title);
+                            $("#" + result.singles[i].id).append("<a class='btn btn-success follow' onclick='add_single(" + result.singles[i].id + ")'>添加</a>");
+                        }
+
+                    }
+                }
+            });
+        });
+
+        function add_single(id) {
+            $.ajax({
+                url: "{{url('/api/papermanage/import/paper')}}" + "/" + "{{$paper->id}}" + "/single/" + id,
+                dataType: "json",
+                method: "get",
+                success: function (result) {
+                    if ("success" == result.status) {
+                        alert("添加试题成功");
+                        location.reload();
+                    } else if ("existed" == result.status) {
+                        alert("试题已经添加");
+                    }
+                }
+            });
+        }
+
+    </script>
 @endsection

@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Paper;
 use Auth;
+use App\Single;
+use Config;
+use App\Question;
 use Illuminate\Http\Request;
 use Response;
 
@@ -123,5 +126,67 @@ class PaperController extends Controller {
 
     }
 
+    public function import_single($paper_id, $single_id) {
+        $this->authorize('userManage', Auth::user());
 
+        try {
+
+            $response = [
+                "status" => "",
+            ];
+
+            $statusCode = 200;
+            $single = Single::findOrFail($single_id);
+            $paper = Paper::findOrFail($paper_id);
+
+            if (Question::where('paper_id', $paper->id)->where('question_id', $single->id)->count()) {
+
+                $response['status'] = "exist";
+            } else {
+                $question = new Question;
+
+                $question->paper_id = $paper_id;
+                $question->question_id = $single_id;
+                $question->type = Config::get('constants.QUESTION_SINGLE');
+
+                if ($question->save()) {
+                    $response["status"] = "success";
+                } else {
+                    $response["status"] = "noresult";
+                }
+            }
+
+        } catch (\Exception $e) {
+            $response = [
+                "error" => $e,
+                "status" => "fails",
+            ];
+            $statusCode = 404;
+        } finally {
+            return Response::json($response, $statusCode);
+        }
+    }
+
+
+    public function remove($question_id) {
+
+        $this->authorize('userManage', Auth::user());
+
+        try {
+            $question = Question::findOrFail($question_id);
+            $question->delete();
+            $response = [
+                "status" => "success",
+            ];
+
+            return Response::json($response, 200);
+        } catch (\Exception $e) {
+            $response = [
+                "status" => "fails",
+                "reason" => $e,
+            ];
+            return Response::json($response, 404);
+        }
+
+    }
 }

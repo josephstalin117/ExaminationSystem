@@ -32,6 +32,41 @@ class SingleController extends Controller {
         ]);
     }
 
+    public function search($title) {
+
+        $this->authorize('userManage', Auth::user());
+
+        try {
+            $response = [
+                "singles" => [],
+                "status" => "",
+            ];
+
+            $statusCode = 200;
+            if (Single::where('title', 'LIKE', "%$title%")->count()) {
+                $singles = Single::where('title', 'LIKE', "%$title%")->get();
+                foreach ($singles as $single) {
+                    $response['singles'][] = [
+                        'id' => $single->id,
+                        'title' => $single->title,
+                    ];
+                }
+                $response["status"] = "success";
+            } else {
+                $response["status"] = "noresult";
+            }
+
+        } catch (\Exception $e) {
+            $response = [
+                "error" => $e,
+                "status" => "fails",
+            ];
+            $statusCode = 404;
+        } finally {
+            return Response::json($response, $statusCode);
+        }
+    }
+
     public function store(Request $request, $id = 0) {
 
         $this->authorize('userManage', Auth::user());

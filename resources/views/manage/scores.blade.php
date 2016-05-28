@@ -47,22 +47,20 @@
         </div>
     </div>
     <script>
-        $(document).on("click", ".openModal", function () {
-            var user_id = $(this).data('id');
-            $("#delete_confirm").click(function () {
+        function delete_score(id) {
+            if (confirm("是否删除此成绩")) {
                 $.ajax({
-                    url: "{{url('/')}}/api/paper/delete/" + user_id,
+                    url: "{{url('/api/message/delete')}}" + "/" + message_id,
                     dataType: "json",
                     method: "get",
                     success: function (data) {
                         if ("success" == data.status) {
-                            console.log('1');
                             location.reload();
                         }
                     }
                 });
-            });
-        });
+            }
+        }
     </script>
 
 @endsection

@@ -3,10 +3,96 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use Auth;
+use App\Single;
+use App\Question;
 use App\Http\Requests;
+use Illuminate\Support\Facades\Response;
 
-class SingleController extends Controller
-{
-    //
+class SingleController extends Controller {
+
+    public function __construct() {
+
+        $this->middleware('auth');
+    }
+
+    public function create() {
+
+        $this->authorize('userManage', Auth::user());
+        return view('manage.create_single');
+    }
+
+    public function update($id) {
+
+        $this->authorize('userManage', Auth::user());
+
+        $single = Single::findOrFail($id);
+        return view('manage.update_single', [
+            'single' => $single,
+        ]);
+    }
+
+    public function store(Request $request, $id = 0) {
+
+        $this->authorize('userManage', Auth::user());
+
+        $this->validate($request, [
+            'title' => 'required',
+            'score' => 'required',
+            'a' => 'required',
+            'b' => 'required',
+            'c' => 'required',
+            'd' => 'required',
+            'answer' => 'required',
+            'remark' => 'required',
+        ]);
+
+        if ($id == 0) {
+            $single = new Single;
+        } else {
+            $single = Single::findOrFail($id);
+        }
+
+        $single->user_id = Auth::user()->id;
+        $single->title = $request->input('title');
+        $single->score = $request->input('score');
+        $single->a = $request->input('a');
+        $single->b = $request->input('b');
+        $single->c = $request->input('c');
+        $single->d = $request->input('d');
+        $single->answer = $request->input('answer');
+        $single->remark = $request->input('remark');
+
+        if ($single->save()) {
+            $request->session()->flash('success', '更新成功');
+        }
+
+
+        $request->session()->flash('success', '更新成功');
+        return redirect('/question/singles');
+    }
+
+    public function destroy($id) {
+
+        $this->authorize('userManage', Auth::user());
+
+        try {
+            $single = Single::findOrFail($id);
+            $questions = Question::where('question_id', $single->id)->get();
+            foreach ($questions as $question) {
+                $question->delete();
+            }
+            $single->delete();
+            $response = [
+                "status" => "success",
+            ];
+
+            return Response::json($response, 200);
+        } catch (\Exception $e) {
+            $response = [
+                "status" => "success",
+            ];
+            return Response::json($response, 404);
+        }
+    }
 }

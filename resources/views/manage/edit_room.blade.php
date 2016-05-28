@@ -10,7 +10,7 @@
                     <div class="panel-body">
                         @include('common.errors')
                         <div class="row" style="margin-top: 10px">
-                            <a href="" type="button" class="btn btn-danger" data-toggle="modal"
+                            <a href="" type="button" class="btn btn-primary" data-toggle="modal"
                                data-target="#search_user_dialog">添加考试学生</a>
                         </div>
                         @if(count($room_users)>0)
@@ -27,7 +27,7 @@
                                         <tr class="openModal" data-id="{{$room_user->id}}">
                                             <td>{{$room_user->user->profile->nickname}}</td>
                                             <td>
-                                                <a href="" type="button" class="btn btn-primary"
+                                                <a href="" type="button" class="btn btn-danger"
                                                    onclick="remove_user({{$room_user->id}})">删除考生</a>
                                             </td>
                                         </tr>

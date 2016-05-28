@@ -9,7 +9,6 @@
 
                     <div class="panel-body">
                         @include('common.errors')
-                        @include('paper.search')
                         <div class="row" style="margin-top: 10px">
                             <button type="button" class="btn btn-success" data-toggle="modal"
                                     data-target="#create_dialog">创建新试卷
@@ -25,7 +24,6 @@
                                         <th>总分</th>
                                         <th>用时</th>
                                         <th>备注</th>
-                                        <th>浏览</th>
                                         <th>修订</th>
                                         <th>删除</th>
                                     </tr>
@@ -38,9 +36,6 @@
                                             <td>{{$paper->score}}</td>
                                             <td>{{$paper->time}}</td>
                                             <td>{{$paper->remark}}</td>
-                                            <td><a href="" type="button" data-id="{{$paper->id}}"
-                                                   class="btn btn-primary openDetail" data-toggle="modal"
-                                                   data-target="#detail">浏览</a></td>
                                             <td><a href="{{url('paper/edit/'.$paper->id)}}" type="button"
                                                    data-id="{{$paper->id}}"
                                                    class="btn btn-primary openDetail">修订</a></td>

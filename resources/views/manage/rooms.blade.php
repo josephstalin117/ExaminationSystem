@@ -9,7 +9,6 @@
 
                     <div class="panel-body">
                         @include('common.errors')
-                        @include('paper.search')
                         <div class="row" style="margin-top: 10px">
                             <a href="{{url('roommanage/create')}}" class="btn btn-success">创建新考场</a>
                         </div>
@@ -32,9 +31,15 @@
                                     @foreach($rooms as $room)
                                         <tr class="openModal" data-id="{{$room->id}}">
                                             <td>{{$room->name}}</td>
-                                            <td>{{$room->paper->name}}</td>
-                                            <td>{{$room->paper->score}}</td>
-                                            <td>{{$room->paper->time}}</td>
+                                            @if(count($room->paper))
+                                                <td>{{$room->paper->name}}</td>
+                                                <td>{{$room->paper->score}}</td>
+                                                <td>{{$room->paper->time}}</td>
+                                            @else
+                                                <td>暂无试卷</td>
+                                                <td>暂无成绩</td>
+                                                <td>暂无数据</td>
+                                            @endif
                                             <td>{{$room->remark}}</td>
                                             <td>
                                                 <a href="{{url('roommanage/room/'.$room->id.'/paper/'.$room->paper_id)}}"
@@ -46,9 +51,8 @@
                                                    data-id="{{$room->id}}"
                                                    class="btn btn-primary">修改</a></td>
                                             <td>
-                                                <a href="" type="button" data-id="{{$room->id}}"
-                                                   class="btn btn-danger" data-toggle="modal"
-                                                   data-target="#delete_dialog"><i class="fa fa-btn fa-trash"></i>删除</a>
+                                                <a href="" type="button" onclick="delete_room({{$room->id}})"
+                                                   class="btn btn-danger"><i class="fa fa-btn fa-trash"></i>删除</a>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -62,22 +66,19 @@
         </div>
     </div>
     <script>
-        $(document).on("click", ".openModal", function () {
-            var user_id = $(this).data('id');
-            $("#delete_confirm").click(function () {
+        function delete_room(id) {
+            if (confirm("是否删除此考场")) {
                 $.ajax({
-                    url: "{{url('/')}}/api/paper/delete/" + user_id,
+                    url: "{{url('/api/roommanage/delete')}}" + "/" + id,
                     dataType: "json",
                     method: "get",
                     success: function (data) {
                         if ("success" == data.status) {
-                            console.log('1');
                             location.reload();
                         }
                     }
                 });
-            });
-        });
+            }
+        }
     </script>
-
 @endsection

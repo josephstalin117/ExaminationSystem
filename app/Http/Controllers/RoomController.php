@@ -149,25 +149,27 @@ class RoomController extends Controller {
         }
     }
 
-    public function destroy(Request $request, $id) {
+    public function destroy($id) {
         $this->authorize('userManage', Auth::user());
 
         try {
-            $paper = Room::findOrFail($id);
-            $questions = $paper->questions;
-            foreach ($questions as $question) {
-                $question->delete();
+            $room = Room::findOrFail($id);
+            $room->delete();
+
+            $room_users = Room_user::where('room_id', $id)->get();
+
+            foreach ($room_users as $room_user) {
+                $room_user->delete();
             }
-            $paper->delete();
+
             $response = [
                 "status" => "success",
             ];
 
-            $request->session()->flash('success', '删除成功');
             return Response::json($response, 200);
         } catch (\Exception $e) {
             $response = [
-                "status" => "success",
+                "status" => "fails",
             ];
             return Response::json($response, 404);
         }

@@ -34,14 +34,18 @@ Route::get('/roommanage/room/{room_id}/paper/{paper_id}', 'RoomController@scores
 Route::get('/roommanage/create', 'RoomController@create');
 Route::post('/roommanage/store', 'RoomController@store');
 Route::get('/roommanage/edit/{id}', 'RoomController@edit');
-Route::get('/roommanage/room/delete/{id}', 'RoomController@delete');
 
 //paper manage
 Route::get('/papers', 'PaperController@index');
 Route::post('/paper/create', 'PaperController@create');
 Route::get('/paper/edit/{id}', 'PaperController@edit');
-Route::post('/question/create', 'QuestionController@create');
+
+//question manage
 Route::get('/question/singles', 'QuestionController@list_singles');
+Route::post('/question/create', 'QuestionController@create');
+Route::get('/question/single/create', 'SingleController@create');
+Route::get('/question/single/update/{id}', 'SingleController@update');
+Route::post('/question/single/store/{id?}', 'SingleController@store');
 
 //exam manage
 Route::get('exam/rooms', 'ExamController@exam_rooms');
@@ -61,4 +65,7 @@ Route::group(['prefix' => 'api'], function () {
     //room
     Route::get('/roommanage/{room_id}/user/{user_id}', 'RoomController@add_user');
     Route::get('/roommanage/user/remove/{id}', 'RoomController@remove_user');
+    Route::get('/roommanage/delete/{id}', 'RoomController@destroy');
+    //single
+    Route::get('/questionmanage/single/delete/{id}', 'SingleController@destroy');
 });

@@ -10,9 +10,11 @@
                     <div class="panel-body">
                         @include('common.errors')
                         <div class="row">
-                            <button type="button" class="btn btn-success" data-toggle="modal"
-                                    data-target="#create_dialog">添加题目
-                            </button>
+                            <a type="button" class="btn btn-success" data-toggle="modal"
+                               data-target="#create_dialog">添加题目
+                            </a>
+                            <a type="button" class="btn btn-primary" href="">导入题目
+                            </a>
                         </div>
                         @if(count($questions)>0)
                             <div class="row" style="margin-top: 10px;">

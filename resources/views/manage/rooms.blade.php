@@ -42,10 +42,12 @@
                                             @endif
                                             <td>{{$room->remark}}</td>
                                             <td>
-                                                <a href="{{url('roommanage/room/'.$room->id.'/paper/'.$room->paper_id)}}"
-                                                   type="button"
-                                                   data-id="{{$room->id}}"
-                                                   class="btn btn-primary">查看考场成绩</a></td>
+                                                @if(count($room->paper))
+                                                    <a href="{{url('roommanage/room/'.$room->id.'/paper/'.$room->paper_id)}}"
+                                                       type="button" class="btn btn-primary">查看考场成绩</a></td>
+                                            @else
+                                                <a href="" type="button" class="btn btn-primary">查看考场成绩</a></td>
+                                            @endif
                                             <td>
                                                 <a href="{{url('roommanage/edit/'.$room->id)}}" type="button"
                                                    data-id="{{$room->id}}"

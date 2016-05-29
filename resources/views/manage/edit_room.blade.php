@@ -25,11 +25,19 @@
                                     <tbody>
                                     @foreach($room_users as $room_user)
                                         <tr class="openModal" data-id="{{$room_user->id}}">
-                                            <td>{{$room_user->user->profile->nickname}}</td>
-                                            <td>
-                                                <a href="" type="button" class="btn btn-danger"
-                                                   onclick="remove_user({{$room_user->id}})">删除考生</a>
-                                            </td>
+                                            @if($room_user->user)
+                                                <td>{{$room_user->user->profile->nickname}}</td>
+                                                <td>
+                                                    <a href="" type="button" class="btn btn-danger"
+                                                       onclick="remove_user({{$room_user->id}})">删除考生</a>
+                                                </td>
+                                            @else
+                                                <td>暂无考生</td>
+                                                <td>
+                                                    <a href="" type="button" class="btn btn-danger"
+                                                       onclick="">删除考生</a>
+                                                </td>
+                                            @endif
                                         </tr>
                                     @endforeach
                                     </tbody>

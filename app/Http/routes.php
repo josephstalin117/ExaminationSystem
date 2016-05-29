@@ -17,7 +17,12 @@ Route::get('/', function () {
 Route::auth();
 Route::get('/home', 'HomeController@index');
 
+//wechat
 Route::any('/wechat', 'WechatController@serve');
+
+Route::group(['middleware' => ['web']], function () {
+    Route::get('/menu', 'MenuController@menu');
+});
 
 //profile
 Route::get('/profile', 'ProfileController@index');

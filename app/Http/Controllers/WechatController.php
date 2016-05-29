@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Config;
 use Log;
-
 use App\Http\Requests;
+use EasyWeChat;
 
 class WechatController extends Controller {
     //
@@ -19,11 +20,12 @@ class WechatController extends Controller {
 
         $wechat = app('wechat');
         $wechat->server->setMessageHandler(function ($message) {
-            return "欢迎关注 overtrue！";
+            return "欢迎关注宝宝!";
         });
 
         Log::info('return response.');
 
         return $wechat->server->serve();
     }
+
 }

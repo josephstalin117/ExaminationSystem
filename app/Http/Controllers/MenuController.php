@@ -16,7 +16,7 @@ class MenuController extends Controller {
      * @param $menu
      */
     public function __construct(Application $app) {
-        $this->menu = $app;
+        $this->menu = $app->menu;
     }
 
     public function menu() {

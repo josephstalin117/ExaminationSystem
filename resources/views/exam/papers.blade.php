@@ -37,6 +37,8 @@
                                     </tbody>
                                 </table>
                             </div>
+                        @else
+                            <div class="row">暂无考试</div>
                         @endif
                     </div>
                 </div>

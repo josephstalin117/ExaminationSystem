@@ -34,7 +34,7 @@
                             </div>
                         @else
                             <div class="row">
-                                暂无考场
+                                暂无考场成绩
                             </div>
                         @endif
                     </div>

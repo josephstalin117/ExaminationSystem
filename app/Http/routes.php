@@ -24,6 +24,18 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/menu', 'MenuController@menu');
 });
 
+Route::group(['middleware' => ['web', 'wechat.oauth']], function () {
+    Route::get('/user', function () {
+        $user = session('wechat.oauth_user'); // 拿到授权用户资料
+
+        dd($user);
+    });
+
+    Route::get('/', function () {
+        return view('welcome');
+    });
+});
+
 //profile
 Route::get('/profile', 'ProfileController@index');
 Route::post('/profile/update', 'ProfileController@update');

@@ -49,6 +49,7 @@
                                     @endforeach
                                     </tbody>
                                 </table>
+                                {!! $singles->links() !!}
                             </div>
                         @else
                             <div class="row">

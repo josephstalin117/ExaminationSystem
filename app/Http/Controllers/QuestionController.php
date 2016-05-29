@@ -58,7 +58,7 @@ class QuestionController extends Controller {
 
         $this->authorize('userManage', Auth::user());
 
-        $singles = Single::all();
+        $singles = Single::paginate(10);
 
         return view('manage.singles', [
             'singles' => $singles,

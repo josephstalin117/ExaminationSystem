@@ -22,29 +22,10 @@ class MenuController extends Controller {
     public function menu() {
         $buttons = [
             [
-                "type" => "click",
+                "type" => "view",
                 "name" => "登陆考试系统",
+                "url" => "http://121.42.50.74/",
                 "key" => "EXAM"
-            ],
-            [
-                "name" => "菜单",
-                "sub_button" => [
-                    [
-                        "type" => "view",
-                        "name" => "登陆",
-                        "url" => "http://121.42.50.74/"
-                    ],
-                    [
-                        "type" => "view",
-                        "name" => "视频",
-                        "url" => "http://v.qq.com/"
-                    ],
-                    [
-                        "type" => "click",
-                        "name" => "赞一下我们",
-                        "key" => "V1001_GOOD"
-                    ],
-                ],
             ],
         ];
         $this->menu->add($buttons);

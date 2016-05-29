@@ -23,16 +23,16 @@ class MenuController extends Controller {
         $buttons = [
             [
                 "type" => "click",
-                "name" => "今日歌曲",
-                "key" => "V1001_TODAY_MUSIC"
+                "name" => "登陆考试系统",
+                "key" => "EXAM"
             ],
             [
                 "name" => "菜单",
                 "sub_button" => [
                     [
                         "type" => "view",
-                        "name" => "搜索",
-                        "url" => "http://www.soso.com/"
+                        "name" => "登陆",
+                        "url" => "http://121.42.50.74/"
                     ],
                     [
                         "type" => "view",

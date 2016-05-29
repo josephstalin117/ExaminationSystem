@@ -17,7 +17,7 @@ class WechatController extends Controller {
     public function serve() {
         Log::info('request arrived.');
 
-        $wechat = app('WeChat');
+        $wechat = app('wechat');
         $wechat->server->setMessageHandler(function ($message) {
             return "欢迎关注宝宝!";
         });

@@ -26,7 +26,7 @@ class MenuController extends Controller {
                 "name" => "登陆考试系统",
                 "url" => "http://121.42.50.74/",
                 "key" => "EXAM"
-            ],
+            ]
         ];
         $this->menu->add($buttons);
     }

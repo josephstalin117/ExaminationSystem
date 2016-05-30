@@ -24,7 +24,7 @@ class MenuController extends Controller {
             [
                 "type" => "view",
                 "name" => "登陆考试系统",
-                "url" => "http://121.42.50.74/",
+                "url" => "http://exam.vip.natapp.cn/",
                 "key" => "EXAM"
             ]
         ];

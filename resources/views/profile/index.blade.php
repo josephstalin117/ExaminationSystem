@@ -27,11 +27,6 @@
                                 <input type="text" class="form-control" id="address" name="address"
                                        placeholder="请输入您的地址" value="{{$profile->address}}">
                             </div>
-                            <div class="form-group">
-                                <label for="avatar">头像</label>
-                                <input type="file" id="avatar">
-                                <p class="help-block">上传头像请小于2m</p>
-                            </div>
                             <button type="submit" class="btn btn-default">Submit</button>
                         </form>
                     </div>

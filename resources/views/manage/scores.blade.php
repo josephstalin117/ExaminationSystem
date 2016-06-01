@@ -23,8 +23,16 @@
                                     <tbody>
                                     @foreach($scores as $score)
                                         <tr class="openModal" data-id="{{$score->id}}">
-                                            <td>{{$score->user->profile->nickname}}</td>
-                                            <td>{{$score->paper->name}}</td>
+                                            @if($score->user)
+                                                <td>{{$score->user->profile->nickname}}</td>
+                                            @else
+                                                <td>暂无考生</td>
+                                            @endif
+                                            @if($score->paper)
+                                                <td>{{$score->paper->name}}</td>
+                                            @else
+                                                <td>暂无试卷</td>
+                                            @endif
                                             <td>{{$score->score}}</td>
                                             <td>
                                                 <a href="" type="button" data-id="{{$score->id}}"

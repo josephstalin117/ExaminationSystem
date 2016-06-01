@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Room_user;
+use App\Score;
 use Auth;
 use Response;
 use Illuminate\Http\Request;
@@ -113,6 +115,8 @@ class UserManageController extends Controller {
         try {
             $user = User::findOrFail($id);
             $user->profile->delete();
+            Room_user::where('user_id',$user->id)->delete();
+            Score::where('user_id',$user->id)->delete();
             $user->delete();
             $response = [
                 "status" => "success",
@@ -153,7 +157,6 @@ class UserManageController extends Controller {
         $user = User::findOrFail($id);
         $user->profile->delete();
         $user->delete();
-
 
         return redirect('/usermanage/student');
     }

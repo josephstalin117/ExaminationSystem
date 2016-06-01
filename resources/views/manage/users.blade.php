@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-md-10 col-md-offset-1">
                 <div class="panel panel-default">
-                    <div class="panel-heading">个人资料</div>
+                    <div class="panel-heading">用户管理</div>
 
                     <div class="panel-body">
                         @include('common.errors')
@@ -113,7 +113,7 @@
                         </div>
                         <div class="form-group">
                             <label for="email">邮箱</label>
-                            <input type="text" class="form-control" id="email_update" name="email"
+                            <input type="email" class="form-control" id="email_update" name="email"
                                    placeholder="请输入邮箱">
                         </div>
                         <div class="form-group">

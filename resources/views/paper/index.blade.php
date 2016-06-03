@@ -24,7 +24,8 @@
                                         <th>总分</th>
                                         <th>用时</th>
                                         <th>备注</th>
-                                        <th>修订</th>
+                                        <th>修改试卷</th>
+                                        <th>修订题目</th>
                                         <th>删除</th>
                                     </tr>
                                     </thead>
@@ -37,8 +38,9 @@
                                             <td>{{$paper->time}}</td>
                                             <td>{{$paper->remark}}</td>
                                             <td><a href="{{url('paper/edit/'.$paper->id)}}" type="button"
-                                                   data-id="{{$paper->id}}"
-                                                   class="btn btn-primary openDetail">修订</a></td>
+                                                   class="btn btn-primary">修改</a></td>
+                                            <td><a href="{{url('paper/update/'.$paper->id)}}" type="button"
+                                                   class="btn btn-primary openDetail">修订试题</a></td>
                                             <td>
                                                 <a href="" type="button" data-id="{{$paper->id}}"
                                                    class="btn btn-danger" data-toggle="modal"

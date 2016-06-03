@@ -89,6 +89,39 @@ class PaperController extends Controller {
         return redirect('/papers');
     }
 
+    public function update($id) {
+        $this->authorize('userManage', Auth::user());
+
+        $paper = Paper::findOrFail($id);
+        return view('manage.update_paper', [
+            'paper' => $paper,
+        ]);
+    }
+
+    public function store(Request $request) {
+
+        $this->authorize('userManage', Auth::user());
+
+        $this->validate($request, [
+            'name' => 'required',
+            'score' => 'required',
+            'time' => 'required',
+            'remark' => 'required',
+        ]);
+
+        $paper = Paper::findOrFail($request->input('id'));
+
+        $paper->user_id = Auth::user()->id;
+        $paper->name = $request->input('name');
+        $paper->score = $request->input('score');
+        $paper->remark = $request->input('remark');
+
+        $paper->save();
+
+        $request->session()->flash('success', '更新成功');
+        return redirect('/papers');
+    }
+
     public function edit($id) {
         $this->authorize('userManage', Auth::user());
 

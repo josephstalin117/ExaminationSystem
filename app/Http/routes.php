@@ -50,6 +50,8 @@ Route::get('/roommanage/edit/{id}', 'RoomController@edit');
 //paper manage
 Route::get('/papers', 'PaperController@index');
 Route::post('/paper/create', 'PaperController@create');
+Route::post('/paper/store', 'PaperController@store');
+Route::get('/paper/update/{id}', 'PaperController@update');
 Route::get('/paper/edit/{id}', 'PaperController@edit');
 
 //question manage

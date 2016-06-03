@@ -67,7 +67,6 @@ class SingleController extends Controller {
         }
     }
 
-    //@todo 可能存在bug
     public function store(Request $request) {
 
         $this->authorize('userManage', Auth::user());

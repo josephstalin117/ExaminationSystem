@@ -9,6 +9,7 @@
 
                     <div class="panel-body">
                         @include('common.errors')
+                        @include('manage.search')
                         @if(count($singles)>0)
                             <div class="row">
                                 <a type="button" class="btn btn-success" href="{{url('/question/single/create')}}">添加题目

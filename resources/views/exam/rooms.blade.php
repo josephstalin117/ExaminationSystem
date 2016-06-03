@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-md-10 col-md-offset-1">
                 <div class="panel panel-default">
-                    <div class="panel-heading">考场管理</div>
+                    <div class="panel-heading">要参加的考试</div>
 
                     <div class="panel-body">
                         @include('common.errors')

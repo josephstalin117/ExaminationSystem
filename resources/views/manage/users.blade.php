@@ -9,7 +9,8 @@
 
                     <div class="panel-body">
                         @include('common.errors')
-                        <div class="row" style="margin-top: 10px">
+                        @include('manage.search')
+                        <div class="row">
                             <button type="button" class="btn btn-success" data-toggle="modal"
                                     data-target="#create_dialog">创建用户
                             </button>
@@ -30,7 +31,7 @@
                                     @foreach($students as $student)
                                         <tr>
                                             <td>{{$student->name}}</td>
-                                            <td>{{$student->profile->nickname}}</td>
+                                            <td>{{$student->nickname}}</td>
                                             <td><a href="" type="button" data-id="{{$student->id}}"
                                                    class="btn btn-primary openDetail" data-toggle="modal"
                                                    data-target="#detail_dialog">详情</a></td>
@@ -47,6 +48,7 @@
                                     @endforeach
                                     </tbody>
                                 </table>
+                                {!! $students->links() !!}
                             </div>
                         @endif
                     </div>

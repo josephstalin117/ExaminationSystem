@@ -19,11 +19,16 @@ class PaperController extends Controller {
         $this->middleware('auth');
     }
 
-    public function index() {
+    public function index(Request $request) {
         $this->authorize('userManage', Auth::user());
-        $papers = Paper::orderBy('created_at')->get();
+
+        $keyword = $request->input('keyword');
+
+        $papers = Paper::where('name', 'LIKE', "%$keyword%")->orderBy('created_at')->paginate(6);
+
         return view('paper.index', [
             'papers' => $papers,
+            'keyword' => $keyword
         ]);
     }
 

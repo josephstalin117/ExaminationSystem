@@ -19,14 +19,16 @@ class RoomController extends Controller {
         $this->middleware('auth');
     }
 
-    public function index() {
+    public function index(Request $request) {
 
         $this->authorize('userManage', Auth::user());
+        $keyword = $request->input('keyword');
 
-        $rooms = Room::get();
+        $rooms = Room::where('name', 'LIKE', "%$keyword%")->paginate(6);
 
         return view('manage.rooms', [
             'rooms' => $rooms,
+            'keyword' => $keyword
         ]);
 
     }

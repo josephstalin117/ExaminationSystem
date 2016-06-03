@@ -27,7 +27,7 @@
                                 <input type="text" class="form-control" id="address" name="address"
                                        placeholder="请输入您的地址" value="{{$profile->address}}">
                             </div>
-                            <button type="submit" class="btn btn-default">Submit</button>
+                            <button type="submit" class="btn btn-default">提交</button>
                         </form>
                     </div>
                 </div>

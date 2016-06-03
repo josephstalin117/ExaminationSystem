@@ -54,14 +54,15 @@ class QuestionController extends Controller {
         return redirect('/paper/edit/' . $request->input('paper_id'));
     }
 
-    public function list_singles() {
+    public function list_singles(Request $request) {
 
         $this->authorize('userManage', Auth::user());
-
-        $singles = Single::paginate(10);
+        $keyword = $request->input('keyword');
+        $singles = Single::where('title', "LIKE", "%$keyword%")->paginate(10);
 
         return view('manage.singles', [
             'singles' => $singles,
+            'keyword' => $keyword
         ]);
     }
 

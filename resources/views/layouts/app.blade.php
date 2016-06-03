@@ -71,6 +71,27 @@
                                 <li><a href="{{ url('/roommanage/rooms') }}">考场管理</a></li>
                             </ul>
                         </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                               aria-expanded="false">
+                                公告管理 <span class="caret"></span>
+                            </a>
+
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="{{ url('/papers') }}">公告管理</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                               aria-expanded="false">
+                                成绩管理 <span class="caret"></span>
+                            </a>
+
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="{{ url('/papers') }}">试卷成绩统计</a></li>
+                                <li><a href="{{ url('/question/singles')}}">用户成绩统计</a></li>
+                            </ul>
+                        </li>
                     @elseif(Config::get('constants.ROLE_STUDENT')==Auth::user()->role)
                         <li><a href="{{ url('/exam/rooms') }}">参加考试</a></li>
                         <li><a href="{{ url('/exam/scores') }}">查看成绩</a></li>

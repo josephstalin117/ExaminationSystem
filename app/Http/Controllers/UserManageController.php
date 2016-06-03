@@ -31,13 +31,16 @@ class UserManageController extends Controller {
      *
      * @return \Illuminate\Http\Response
      */
-    public function index() {
-        $students = User::where('role', 2)->orderBy('created_at')->get();
+    public function index(Request $request) {
+        $this->authorize('userManage', Auth::user());
+        $keyword = $request->input('keyword');
+
+        $students = DB::table('users')->join('profiles', 'users.id', '=', 'profiles.user_id')->select('users.*', 'profiles.nickname')->where('users.role', Config::get('constants.ROLE_STUDENT'))->where('profiles.nickname', "LIKE", "%$keyword%")->paginate(6);
         return view('manage.users', [
             'students' => $students,
+            'keyword' => $keyword
         ]);
     }
-
 
     /**
      * Display the specified resource.
@@ -103,7 +106,7 @@ class UserManageController extends Controller {
         } catch (\Exception $e) {
             $response = [
                 "error" => "can't find user",
-                "status"=>"fails",
+                "status" => "fails",
             ];
             $statusCode = 404;
         } finally {
@@ -115,8 +118,8 @@ class UserManageController extends Controller {
         try {
             $user = User::findOrFail($id);
             $user->profile->delete();
-            Room_user::where('user_id',$user->id)->delete();
-            Score::where('user_id',$user->id)->delete();
+            Room_user::where('user_id', $user->id)->delete();
+            Score::where('user_id', $user->id)->delete();
             $user->delete();
             $response = [
                 "status" => "success",

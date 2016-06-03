@@ -9,6 +9,7 @@
 
                     <div class="panel-body">
                         @include('common.errors')
+                        @include('manage.search')
                         <div class="row" style="margin-top: 10px">
                             <a href="{{url('roommanage/create')}}" class="btn btn-success">创建新考场</a>
                         </div>

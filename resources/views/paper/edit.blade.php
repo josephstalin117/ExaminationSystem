@@ -56,6 +56,8 @@
                                         </tr>
                                         <tr>
                                             <td>
+                                                <b>答案</b>
+                                                <p>{{$question->single->answer}}</p>
                                                 <b>说明</b>
                                                 <p>{{$question->single->remark}}</p>
                                                 <b>分值</b>

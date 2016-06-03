@@ -51,7 +51,7 @@
                                 <input type="text" class="form-control" id="remark" name="remark">
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                                <a type="button" class="btn btn-default" href="{{url('/question/singles')}}">关闭</a>
                                 <button type="submit" class="btn btn-primary">保存</button>
                             </div>
                         </form>

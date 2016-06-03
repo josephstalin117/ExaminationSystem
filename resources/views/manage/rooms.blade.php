@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-md-10 col-md-offset-1">
                 <div class="panel panel-default">
-                    <div class="panel-heading">试卷管理</div>
+                    <div class="panel-heading">考场管理</div>
 
                     <div class="panel-body">
                         @include('common.errors')
@@ -22,6 +22,7 @@
                                         <th>总分</th>
                                         <th>用时</th>
                                         <th>考场备注</th>
+                                        <th>修改</th>
                                         <th>考场成绩</th>
                                         <th>考试学生</th>
                                         <th>删除</th>
@@ -41,6 +42,10 @@
                                                 <td>暂无数据</td>
                                             @endif
                                             <td>{{$room->remark}}</td>
+                                            <td>
+                                                <a href="{{url('roommanage/update')}}/{{$room->id}}" type="button"
+                                                   class="btn btn-primary">修改考场</a>
+                                            </td>
                                             <td>
                                                 @if(count($room->paper))
                                                     <a href="{{url('roommanage/room/'.$room->id.'/paper/'.$room->paper_id)}}"

@@ -44,6 +44,7 @@ Route::post('/usermanage/student/create', 'UserManageController@studentCreate');
 Route::get('/roommanage/rooms', 'RoomController@index');
 Route::get('/roommanage/room/{room_id}/paper/{paper_id}', 'RoomController@scores');
 Route::get('/roommanage/create', 'RoomController@create');
+Route::get('/roommanage/update/{id}', 'RoomController@update');
 Route::post('/roommanage/store', 'RoomController@store');
 Route::get('/roommanage/edit/{id}', 'RoomController@edit');
 

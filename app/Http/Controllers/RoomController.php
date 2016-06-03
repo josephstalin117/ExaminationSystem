@@ -31,6 +31,16 @@ class RoomController extends Controller {
 
     }
 
+    public function update($id) {
+
+        $room = Room::findOrFail($id);
+
+        return view('manage.update_room', [
+            'room' => $room,
+        ]);
+
+    }
+
     public function scores($room_id, $paper_id) {
 
         $this->authorize('userManage', Auth::user());
@@ -59,7 +69,12 @@ class RoomController extends Controller {
             'remark' => 'required',
         ]);
 
-        $room = new Room;
+        if ($request->input('id')) {
+            $room = Room::findOrFail($request->input('id'));
+        } else {
+            $room = new Room;
+        }
+
         $room->name = $request->input('name');
         $room->paper_id = $request->input('paper_id');
         $room->remark = $request->input('remark');
@@ -67,7 +82,7 @@ class RoomController extends Controller {
 
 
         if ($room) {
-            $request->session()->flash('success', '新增一个考场');
+            $request->session()->flash('success', '更新一个考场');
         } else {
             $request->session()->flash('error', '失败');
         }

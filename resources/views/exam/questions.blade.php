@@ -5,7 +5,10 @@
         <div class="row">
             <div class="col-md-10 col-md-offset-1">
                 <div class="panel panel-default">
-                    <div class="panel-heading">开始考试</div>
+                    <div class="panel-heading">
+                        <div class="row">开始考试</div>
+                        <div class="row"> 考试时间<h2 id="time"></h2></div>
+                    </div>
 
                     <div class="panel-body">
                         @include('common.errors')
@@ -52,7 +55,8 @@
                                             </tr>
                                         @endforeach
                                     </table>
-                                    <button class="btn btn-default" type="submit">提交试卷</button>
+                                    <button class="btn btn-default" type="submit" onclick="confirm('是否提交试卷')">提交试卷
+                                    </button>
                                 </form>
                             </div>
                         @else
@@ -63,4 +67,29 @@
             </div>
         </div>
     </div>
+
+    <script>
+        function startTimer(duration, display) {
+            var timer = duration, minutes, seconds;
+            setInterval(function () {
+                minutes = parseInt(timer / 60, 10);
+                seconds = parseInt(timer % 60, 10);
+
+                minutes = minutes < 10 ? "0" + minutes : minutes;
+                seconds = seconds < 10 ? "0" + seconds : seconds;
+
+                display.text(minutes + ":" + seconds);
+
+                if (--timer < 0) {
+                    timer = duration;
+                }
+            }, 1000);
+        }
+
+        jQuery(function ($) {
+            var minutes = parseInt({{$time}});
+            var fiveMinutes = 60 * minutes, display = $('#time');
+            startTimer(fiveMinutes, display);
+        });
+    </script>
 @endsection

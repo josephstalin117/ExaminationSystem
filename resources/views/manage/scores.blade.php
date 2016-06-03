@@ -17,7 +17,6 @@
                                         <th>学生名</th>
                                         <th>试卷</th>
                                         <th>成绩</th>
-                                        <th>删除</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -34,11 +33,6 @@
                                                 <td>暂无试卷</td>
                                             @endif
                                             <td>{{$score->score}}</td>
-                                            <td>
-                                                <a href="" type="button" data-id="{{$score->id}}"
-                                                   class="btn btn-danger" data-toggle="modal"
-                                                   data-target="#delete_dialog"><i class="fa fa-btn fa-trash"></i>删除</a>
-                                            </td>
                                         </tr>
                                     @endforeach
                                     </tbody>
@@ -54,21 +48,4 @@
             </div>
         </div>
     </div>
-    <script>
-        function delete_score(id) {
-            if (confirm("是否删除此成绩")) {
-                $.ajax({
-                    url: "{{url('/api/message/delete')}}" + "/" + message_id,
-                    dataType: "json",
-                    method: "get",
-                    success: function (data) {
-                        if ("success" == data.status) {
-                            location.reload();
-                        }
-                    }
-                });
-            }
-        }
-    </script>
-
 @endsection

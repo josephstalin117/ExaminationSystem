@@ -96,7 +96,6 @@
 
                         <ul class="dropdown-menu" role="menu">
                             <li><a href="{{ url('/profile') }}">修改个人资料</a></li>
-                            <li><a href="{{ url('/changepwd') }}">修改密码</a></li>
                             <li><a href="{{ url('/logout') }}">登出</a></li>
                         </ul>
                     </li>

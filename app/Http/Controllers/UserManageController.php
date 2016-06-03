@@ -152,15 +152,6 @@ class UserManageController extends Controller {
         return redirect('/usermanage/student');
     }
 
-    public function studentDelete($id) {
-
-        $user = User::findOrFail($id);
-        $user->profile->delete();
-        $user->delete();
-
-        return redirect('/usermanage/student');
-    }
-
     public function studentCreate(Request $request) {
 
         $this->validate($request, [

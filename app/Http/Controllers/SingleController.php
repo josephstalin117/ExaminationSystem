@@ -67,7 +67,8 @@ class SingleController extends Controller {
         }
     }
 
-    public function store(Request $request, $id = 0) {
+    //@todo 可能存在bug
+    public function store(Request $request) {
 
         $this->authorize('userManage', Auth::user());
 
@@ -82,10 +83,11 @@ class SingleController extends Controller {
             'remark' => 'required',
         ]);
 
-        if ($id == 0) {
-            $single = new Single;
+
+        if ($request->input('id')) {
+            $single = Single::findOrFail($request->input('id'));
         } else {
-            $single = Single::findOrFail($id);
+            $single = new Single;
         }
 
         $single->user_id = Auth::user()->id;

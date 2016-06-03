@@ -14,6 +14,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/changepwd', 'Auth\PasswordController@changepwd');
+
 Route::auth();
 Route::get('/home', 'HomeController@index');
 
@@ -55,7 +57,7 @@ Route::get('/question/singles', 'QuestionController@list_singles');
 Route::post('/question/create', 'QuestionController@create');
 Route::get('/question/single/create', 'SingleController@create');
 Route::get('/question/single/update/{id}', 'SingleController@update');
-Route::post('/question/single/store/{id?}', 'SingleController@store');
+Route::post('/question/single/store', 'SingleController@store');
 
 //exam manage
 Route::get('exam/rooms', 'ExamController@exam_rooms');

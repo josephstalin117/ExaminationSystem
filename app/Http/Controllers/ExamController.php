@@ -55,7 +55,7 @@ class ExamController extends Controller {
 
     public function user_scores() {
 
-        $scores = Score::where('user_id', Auth::id())->get();
+        $scores = Score::where('user_id', Auth::id())->paginate(6);
 
         return view('exam.scores', [
             'scores' => $scores,

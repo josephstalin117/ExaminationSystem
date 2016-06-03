@@ -39,6 +39,7 @@
                                     @endforeach
                                     </tbody>
                                 </table>
+                                {!! $scores->links() !!}
                             </div>
                         @else
                             <div class="row">

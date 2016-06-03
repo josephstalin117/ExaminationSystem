@@ -47,7 +47,6 @@
             <!-- Left Side Of Navbar -->
             <ul class="nav navbar-nav">
                 @if(Auth::check())
-                    <li><a href="{{ url('/home') }}">主页</a></li>
                     @if(Config::get('constants.ROLE_ADMIN')==Auth::user()->role)
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
@@ -88,8 +87,8 @@
                             </a>
 
                             <ul class="dropdown-menu" role="menu">
-                                <li><a href="{{ url('/papers') }}">试卷成绩统计</a></li>
-                                <li><a href="{{ url('/question/singles')}}">用户成绩统计</a></li>
+                                <li><a href="{{ url('/statistics/papers') }}">试卷成绩统计</a></li>
+                                <li><a href="{{ url('/statistics/users')}}">用户成绩统计</a></li>
                             </ul>
                         </li>
                     @elseif(Config::get('constants.ROLE_STUDENT')==Auth::user()->role)

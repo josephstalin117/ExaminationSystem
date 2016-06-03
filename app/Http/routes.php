@@ -68,6 +68,12 @@ Route::post('exam/room/{room_id}/paper/{paper_id}/rate', 'ExamController@rate');
 Route::get('exam/room/{room_id}/paper/{paper_id}', 'ExamController@exam');
 Route::get('exam/scores', 'ExamController@user_scores');
 
+//statistics
+Route::get('/statistics/papers', 'StatisticsController@papers');
+Route::get('/statistics/paper/{id}', 'StatisticsController@paper');
+Route::get('/statistics/users', 'StatisticsController@users');
+Route::get('/statistics/user/{id}', 'StatisticsController@user');
+
 //api
 Route::group(['prefix' => 'api'], function () {
     //user

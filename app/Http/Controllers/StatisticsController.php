@@ -62,13 +62,13 @@ class StatisticsController extends Controller {
         foreach ($rooms as $room) {
             $room_users = Room_user::where('room_id', $room->id)->where('attended', Config::get('constants.EXAM_ATTENDED'))->get();
             foreach ($room_users as $room_user) {
-                $user = User::findOrFail($room_user->user_id)->first();
+                $user = User::where('id', $room_user->user_id)->first();
                 $score = Score::where('paper_id', $id)->where('user_id', $user->id)->where('room_id', $room->id)->first();
 
                 array_push($list, array(
                     'nickname' => $user->profile->nickname,
                     'room_name' => $room->name,
-                    'score' => $paper->score,
+                    'score' => $score->score,
                 ));
             }
         }

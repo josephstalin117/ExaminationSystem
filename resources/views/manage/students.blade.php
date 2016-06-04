@@ -46,7 +46,6 @@
                 success: function (result) {
                     if ("success" == result.status) {
                         alert("添加学生成功");
-                        location.reload();
                     } else if ("existed" == result.status) {
                         alert("学生已经添加");
                     }

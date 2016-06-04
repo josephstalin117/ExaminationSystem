@@ -84,7 +84,6 @@
                     @elseif(Config::get('constants.ROLE_STUDENT')==Auth::user()->role)
                         <li><a href="{{ url('/exam/rooms') }}">参加考试</a></li>
                         <li><a href="{{ url('/exam/scores') }}">查看成绩</a></li>
-                        <li><a href="{{ url('/exam/scores') }}">查看公告</a></li>
                     @else
                         <li><a href="{{ url('/papers') }}">查看学生成绩</a></li>
                     @endif

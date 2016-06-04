@@ -23,8 +23,9 @@
                                         <tr>
                                             <td>{{$student->nickname}}</td>
                                             <td>
-                                                <a href="" type="button" class="btn btn-danger"
-                                                   onclick="add_user({{$student->id}})">添加这个考生</a>
+                                                <button href="" type="button" class="btn btn-danger"
+                                                        onclick="add_user({{$student->id}})">添加这个考生
+                                                </button>
                                             </td>
                                         </tr>
                                     @endforeach

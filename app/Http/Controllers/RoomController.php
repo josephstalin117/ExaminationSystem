@@ -8,6 +8,7 @@ use Response;
 use DB;
 use App\User;
 use App\Score;
+use Config;
 use App\Room;
 use App\Room_user;
 use App\Http\Requests;
@@ -101,6 +102,21 @@ class RoomController extends Controller {
             'room_users' => $room_users,
             'room_id' => $id,
         ]);
+    }
+
+    /**
+     * 显示所有学生用户
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function students(Request $request, $room_id) {
+        $students = DB::table('users')->join('profiles', 'users.id', '=', 'profiles.user_id')->select('users.*', 'profiles.nickname')->where('users.role', Config::get('constants.ROLE_STUDENT'))->paginate(6);
+
+        return view('manage.students', [
+            'students' => $students,
+            'room_id' => $room_id
+        ]);
+
     }
 
     public function add_user(Request $request, $room_id, $user_id) {

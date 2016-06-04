@@ -13,6 +13,11 @@
                             <a href="" type="button" class="btn btn-primary" data-toggle="modal"
                                data-target="#search_user_dialog">添加考试学生</a>
                         </div>
+                        <div class="row" style="margin-top: 10px">
+                            {{--添加按钮--}}
+                            <a href="{{url("/roommanage/room/$room_id/students")}}" type="button"
+                               class="btn btn-default">选择考试学生</a>
+                        </div>
                         @if(count($room_users)>0)
                             <div class="row" style="margin-top: 10px;">
                                 <table class="table table-bordered">

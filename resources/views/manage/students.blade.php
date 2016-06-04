@@ -39,18 +39,21 @@
     </div>
     <script>
         function add_user(user_id) {
-            $.ajax({
-                url: "{{url('/api/roommanage')}}" + "/" + "{{$room_id}}" + "/user/" + user_id,
-                dataType: "json",
-                method: "get",
-                success: function (result) {
-                    if ("success" == result.status) {
-                        alert("添加学生成功");
-                    } else if ("existed" == result.status) {
-                        alert("学生已经添加");
+            if (confirm("是否添加这个考生")) {
+                $.ajax({
+                    url: "{{url('/api/roommanage')}}" + "/" + "{{$room_id}}" + "/user/" + user_id,
+                    dataType: "json",
+                    method: "get",
+                    success: function (result) {
+                        if ("success" == result.status) {
+                            alert("添加学生成功");
+                        } else if ("existed" == result.status) {
+                            alert("学生已经添加");
+                        }
                     }
-                }
-            });
+                });
+            }
+
         }
     </script>
 @endsection
